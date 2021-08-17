@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Icon, TabBar, Cell, Button } from 'zarm';
 
 
 const TabIcon = Icon.createFromIconfont('//at.alicdn.com/t/font_1340918_lpsswvb7yv.js');
 
-
 const Home:React.FC = () => {
+  const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState<number | string | undefined>('home');
   const [visible, setVisible] = useState<boolean>(true);
-
+  
+  const handleClick = () => {
+    navigate('demo')
+  }
+  const owerClick = () => {
+    navigate('ower')
+  }
   return <>
       <Cell
         description={
@@ -24,6 +31,8 @@ const Home:React.FC = () => {
       >
         隐藏 | 展示
       </Cell>
+      <Button onClick={handleClick}>demo </Button>
+      <Button onClick={owerClick}>ower </Button>
 
       <TabBar visible={visible} activeKey={activeKey} onChange={(value?: number | string) =>setActiveKey(value)}>
         <TabBar.Item itemKey="home" title="主页" icon={<TabIcon type="home" />} />

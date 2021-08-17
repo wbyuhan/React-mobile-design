@@ -2,10 +2,10 @@
     "name": "react-mobile-design",
     "version": "1.0.0",
     "description": "一个移动端的脚手架",
-    "main": "src/index.tsx",
     "scripts": {
-        "start": "react-scripts-ts start",
-        "build": "react-scripts-ts build",
+        "start": "npm run dev",
+        "dev": "cross-env NODE_ENV=development webpack serve --config ./scripts/webpack.dev.js",
+        "build": "cross-env NODE_ENV=production webpack --config ./scripts/webpack.prod.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -20,21 +20,55 @@
     },
     "homepage": "https://github.com/wbyuhan/React-mobile-design#readme",
     "dependencies": {
-        "@types/react-router-config": "^5.0.3",
+        "@babel/core": "^7.15.0",
+        "@babel/plugin-transform-runtime": "^7.15.0",
+        "@babel/preset-env": "^7.15.0",
+        "@babel/preset-react": "^7.14.5",
+        "@babel/preset-typescript": "^7.15.0",
+        "@babel/runtime-corejs3": "^7.15.3",
+        "@types/webpack-env": "^1.16.2",
+        "babel-plugin-import": "^1.13.3",
+        "clean-webpack-plugin": "^4.0.0-alpha.0",
+        "copy-webpack-plugin": "^9.0.1",
+        "cross-env": "^7.0.3",
+        "css-loader": "^6.2.0",
+        "css-minimizer-webpack-plugin": "^3.0.2",
+        "fork-ts-checker-webpack-plugin": "^6.3.2",
+        "history": "^5.0.1",
+        "less": "^4.1.1",
+        "less-loader": "^10.0.1",
+        "mini-css-extract-plugin": "^2.2.0",
+        "babel-loader": "^8.2.2",
+        "html-webpack-plugin": "latest",
         "mobx": "^6.3.2",
         "mobx-react-lite": "^3.2.0",
+        "node-sass": "^6.0.1",
+        "postcss-loader": "^6.1.1",
+        "postcss-preset-env": "^6.7.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-router-config": "^5.1.1",
-        "react-router-dom": "^5.2.0",
-        "react-scripts": "^4.0.3",
-        "react-scripts-ts": "^3.1.0",
+        "react-router-dom": "^6.0.0-beta.1",
+        "style-loader": "^3.2.1",
+        "webpackbar": "^5.0.0-3",
         "zarm": "^2.9.7"
     },
     "devDependencies": {
         "@types/react": "^17.0.18",
         "@types/react-dom": "^17.0.9",
         "@types/react-router-dom": "^5.1.8",
-        "typescript": "^4.3.5"
-    }
+
+        "path": "^0.12.7",
+        "react-dev-utils": "^11.0.4",
+        "resolve-url-loader": "^4.0.0",
+        "typescript": "^4.3.5",
+        "webpack": "^5.50.0",
+        "webpack-cli": "^4.8.0",
+        "webpack-dev-server": "^3.11.2"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "ie >= 9",
+        "not op_mini all"
+    ]
 }

@@ -18,6 +18,7 @@ declare module 'react-fittext';
 declare module 'bizcharts-plugin-slider';
 declare module 'zip-webpack-plugin'
 declare module 'react-router-config';
+declare module 'zarm/lib/config-provider/locale/zh_CN'
 
 
 // google analytics interface
