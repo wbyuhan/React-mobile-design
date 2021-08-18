@@ -1,19 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-// import { ConfigProvider } from "zarm";
+import { ConfigProvider } from "zarm";
 import App from "@/utils/Router";
-// import zhCN from "zarm/lib/config-provider/locale/zh_CN";
+import zhCN from "zarm/lib/config-provider/locale/zh_CN";
+import "zarm/dist/zarm.css";
 
 if (module && module.hot) {
   module.hot.accept();
 }
-import "zarm/dist/zarm.css";
+
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ConfigProvider locale={zhCN}>
+      <Router>
+        <App />
+      </Router>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

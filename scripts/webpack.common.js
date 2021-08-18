@@ -4,23 +4,25 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const CopyPlugin = require("copy-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-
 const WebpackBar = require('webpackbar') // 进度条
+
 
 const { PROJECT_PATH } = require('./constant')
 const { development, production } = require("./config/env")
 
 
-const getCssLoaders = () => {
+const getCssLoaders = (isModules) => {
 
     const cssLoader = [
         development ? 'style-loader' : MiniCssExtractPlugin.loader,
         {
             loader: 'css-loader',
             options: {
-                modules: {
+                url: true,
+                importLoaders: 2,
+                modules: isModules ? {
                     localIdentName: "[local]--[hash:base64:5]"
-                },
+                } : false,
                 sourceMap: development,
             }
         }
@@ -73,12 +75,13 @@ module.exports = {
     module: {
         rules: [{
                 test: /\.css$/,
-                use: [...getCssLoaders()]
+                use: [...getCssLoaders(false)],
+                sideEffects: true
             },
             {
                 test: /\.less$/,
                 use: [
-                    ...getCssLoaders(),
+                    ...getCssLoaders(true),
                     {
                         loader: 'less-loader',
                         options: {
@@ -89,8 +92,9 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                // include: path.resolve(PROJECT_PATH, './node_modules/zarm'),
                 use: [
-                    ...getCssLoaders(),
+                    ...getCssLoaders(true),
                     {
                         loader: 'sass-loader',
                         options: {
@@ -127,8 +131,7 @@ module.exports = {
             favicon: false
         }),
         new WebpackBar({
-            name: 'Link Startou!!!',
-            color: '#52c41a'
+            name: `Webpack 5`,
         }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {

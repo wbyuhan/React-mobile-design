@@ -24,7 +24,7 @@
       "import",
       {
         "libraryName": "zarm",
-        "style": "scss" // or 'css'
+        "style": true // or 'css'
       }
     ]
   ]
