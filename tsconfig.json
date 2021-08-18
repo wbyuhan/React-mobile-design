@@ -36,7 +36,8 @@
     ".stylelintrc.js",
     ".prettierrc.js",
     "jest.config.js",
-    "mock/*"
+    "mock/*",
+    "scripts/proxy.js"
   ],
   "exclude": [
     "node_modules",

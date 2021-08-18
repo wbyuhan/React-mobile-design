@@ -6,6 +6,9 @@ const path = require('path')
 const common = require('./webpack.common')
 const PostCompile = require('post-compile-webpack-plugin')
 const { PROJECT_PATH, SERVER_HOST, SERVER_PORT } = require('./constant')
+const { REACT_APP_ENV, NODE_ENV } = process.env;
+const proxy = require('./proxy');
+
 
 // 定义自动获取本地ip的方法开始
 const os = require('os');
@@ -47,9 +50,11 @@ module.exports = merge(common, {
                 open: false,
                 hot: true,
                 noInfo: true,
+                // proxy: proxy['REACT_APP_ENV' || 'dev'],
                 historyApiFallback: {
                     index: path.join(PROJECT_PATH, './public/index.html')
                 },
+                before: require('../mock/mock.server.js')
             },
             plugins: [
                     new PostCompile(() => {
