@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require("terser-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const common = require('./webpack.common')
 const { PROJECT_PATH } = require('./constant')
@@ -19,7 +20,9 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:8].css',
             chunkFilename: 'css/[name].[contenthash:8].chunk.css',
-        })
+        }),
+        new BundleAnalyzerPlugin()
+
 
     ],
     optimization: {

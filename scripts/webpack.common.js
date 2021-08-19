@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const CopyPlugin = require("copy-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackBar = require('webpackbar') // 进度条
 
 
@@ -59,6 +60,7 @@ module.exports = {
         path: path.resolve(PROJECT_PATH, './dist'),
         publicPath: '/',
     },
+    // stats: "errors-only",
     cache: {
         type: 'filesystem',
         allowCollectingMemory: true,
@@ -152,5 +154,6 @@ module.exports = {
             }, ],
         }),
         new CleanWebpackPlugin(),
+        new FriendlyErrorsWebpackPlugin()
     ]
 }
