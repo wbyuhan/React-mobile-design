@@ -81,5 +81,9 @@
         "not dead",
         "ie >= 9",
         "not op_mini all"
-    ]
+    ],
+    "engines": {
+        "node": ">=10",
+        "pnpm": ">=3"
+    }
 }
