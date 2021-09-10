@@ -25,32 +25,20 @@ class FormatPlugin {
         }
         return `${bytes.toFixed(1)} ${unit[loop]}`;
     };
-    getGzippedSize(asset) {
-        const filepath = resolve(join(dir, asset.name));
-        if (existsSync(filepath)) {
-            const buffer = readFileSync(filepath);
-            console.log('%c 🍷 this.filesize(zlib.gzipSync(buffer).length): ', 'font-size:20px;background-color: #2EAFB0;color:#fff;', this.filesize(zlib.gzipSync(buffer).length));
-            return this.filesize(zlib.gzipSync(buffer).length);
-
-        }
-        return this.filesize(0);
+    getGzippedSize(buffer) {
+        return this.filesize(zlib.gzipSync(buffer).length);
     }
 
     apply(compiler) {
             const options = this.options
-                // console.log('%c 🥨 options: ', 'font-size:20px;background-color: #465975;color:#fff;', options);
             compiler.hooks.emit.tapAsync('FormatPlugin', (compilation, callback) => {
                         const orderedAssets = compilation.getAssets()
                         ui.div(
-                            this.makeRow(chalk.cyan.bold(`File`), chalk.cyan.bold(`Size`), chalk.cyan.bold(`Gzipped`)) + `\n\n` + orderedAssets.map((asset) =>
+                            this.makeRow(chalk.cyan.bold(`File`), chalk.cyan.bold(`Size`), chalk.cyan.bold(`Gzipped`)) + `\n\n` + orderedAssets.filter((item) => /js$/.test(item.name) || /css$/.test(item.name)).map((asset) =>
                                 this.makeRow(
-                                    /js$/.test(asset.name) ?
-                                    asset.suggested ? // warning for large bundle
-                                    chalk.yellow(join(dir, asset.name)) :
-                                    chalk.green(join(dir, asset.name)) :
-                                    chalk.blue(join(dir, asset.name)),
-                                    this.filesize(asset.size),
-                                    this.getGzippedSize(asset),
+                                    /js$/.test(asset.name) ? chalk.green(join(dir, asset.name)) : /css$/.test(asset.name) ? chalk.blue(join(dir, asset.name)) : '',
+                                    this.filesize(Buffer.byteLength(asset.source.source(), 'utf8')),
+                                    this.getGzippedSize(asset.source.source()),
                                 )
                             ).join(`\n`)
                         )
