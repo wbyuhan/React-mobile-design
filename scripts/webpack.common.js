@@ -154,6 +154,5 @@ module.exports = {
             }, ],
         }),
         new CleanWebpackPlugin(),
-        new FriendlyErrorsWebpackPlugin()
     ]
 }
